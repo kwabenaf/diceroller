@@ -24,24 +24,51 @@ class MainActivity : AppCompatActivity() {
             resultTextView.text = "6"
              */
         }
+
+        //doing a rollDice() straightaway so that the initial image shown on startup will be random
+        rollDice()
     }
 
     private fun rollDice() {
         // Create new Dice object with 6 sides and roll it
-        val dice = Dice(6)
-        val diceRoll = dice.roll()
+        val diceOne = Dice(6)
+        val diceTwo = Dice(6)
+        val diceRoll = diceOne.roll()
+        val diceRollTwo = diceTwo.roll()
 
+        // Find the ImageView in the layout
         val diceImage: ImageView = findViewById(R.id.imageView)
+        val diceImage2: ImageView = findViewById(R.id.imageView2)
 
+        // Update the content description
+        diceImage.contentDescription = diceRoll.toString()
+        diceImage2.contentDescription = diceRollTwo.toString()
 
-        when (diceRoll) {
-            1 -> diceImage.setImageResource(R.drawable.dice_1)
-            2 -> diceImage.setImageResource(R.drawable.dice_2)
-            3 -> diceImage.setImageResource(R.drawable.dice_3)
-            4 -> diceImage.setImageResource(R.drawable.dice_4)
-            5 -> diceImage.setImageResource(R.drawable.dice_5)
-            6 -> diceImage.setImageResource(R.drawable.dice_6)
+        // Determine which drawable resource ID to use based on the dice roll
+        val drawableOne = when (diceRoll) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+
         }
+
+        val drawableTwo = when (diceRollTwo) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+
+        }
+
+
+        // Update the ImageView with the correct drawable resource ID
+        diceImage.setImageResource(drawableOne)
+        diceImage2.setImageResource(drawableTwo)
 
     }
 }
